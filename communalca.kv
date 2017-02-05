@@ -1,0 +1,174 @@
+#:import C kivy.utils.get_color_from_hex
+#:import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+
+<BoxLayout>:
+    spacing: 10
+    padding: 10
+    orientation: 'vertical'
+<InnerBox@BoxLayout>:
+    spacing: 1
+    padding: 1
+    orientation: 'horizontal'
+<Label>:
+	font_size: 30
+
+<TextInput>:
+    multiline: False
+    font_size: 45
+<Button>:
+
+    background_normal: 'button_normal.png'
+    background_down: 'button_down.png'
+    border: (2, 2, 2, 2)
+    font_size: 30
+
+
+ScreenManager:
+    transition: RiseInTransition()
+    
+    Screen:
+        name: 'login'
+        BoxLayout:
+            InnerBox:
+                Label:
+                    text: 'Enter server IP address'
+
+
+            InnerBox:
+
+                TextInput:
+                	id: server
+                    text: app.config.get('section1', 'key1')
+                    font_size: 60
+
+
+            
+            InnerBox:
+                spacing: 40
+                
+
+                Button:
+                    text: 'Clear'
+                    on_press: app.clear_IP()
+                Button:
+                    text: 'Save'
+                    on_press: app.change_config()
+
+            InnerBox:        
+            InnerBox:
+            	orientation: 'horizontal'
+
+                Button:
+                	size_hint: (1, 0.5)
+                    text: 'Connect'
+                    on_press: app.connect_to_server()
+
+
+    Screen:
+        name: 'svet'
+        BoxLayout:
+            
+            InnerBox:
+                    
+                Label:
+                    text: 'T1'
+                TextInput:
+                	id: T1
+                    text: ''
+            InnerBox:
+
+                Label:
+                    text: 'T2'
+                                  
+                TextInput:
+                	id: T2
+                    text: ''
+            InnerBox:
+                    
+                Label:
+                    text: 'T3'
+                
+                TextInput:
+                	id: T3
+                    text: ''
+
+            InnerBox:
+
+            InnerBox:
+
+                Button:
+                	size_hint: (1, 0.5)
+                    text: 'next'
+                    on_press: app.switch_to_voda()
+
+
+    Screen:
+        name: 'voda'
+        BoxLayout:
+            InnerBox:
+                
+                Label:
+                    text: 'Х/В кухня'
+                TextInput:
+                	id: W1
+                    text: ''
+            InnerBox:
+                    
+                Label:
+                    text: 'Г/В кухня'
+                TextInput:
+                	id: W2
+                    text: ''
+            
+            InnerBox:
+                
+                Label:
+                    text: 'Х/В C/У'
+                TextInput:
+                	id: W3
+                    text: ''
+
+            InnerBox:
+
+                Label:
+                    text: 'Г/В C/У'
+                TextInput:
+                	id: W4
+                    text: ''
+
+            InnerBox:
+
+            	Button:
+            		size_hint: (1, 0.5)
+	                text: 'back'
+	                on_press: app.switch_to_svet()
+	            Button:
+	            	size_hint: (1, 0.5)
+	                text: 'next'
+	                on_press: app.switch_to_main()
+	Screen:
+        name: 'main'
+
+        BoxLayout:
+            
+            InnerBox:
+
+                Button:
+                    text: 'Send data'
+                    on_press: app.send_data_to_server()
+            InnerBox:
+
+                Button:
+                    text: 'Disconnect'
+                    on_press: app.disconnect_from_server()
+                    background_normal: 'red_button_normal.png'
+                    background_down: 'red_button_down.png'
+                    border: (2, 2, 2, 2)            
+            InnerBox:
+            InnerBox:
+            InnerBox:
+
+                Button:
+                	size_hint: (1, 0.5)
+                    text: 'Back'
+                    on_press: app.switch_to_voda()

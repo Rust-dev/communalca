@@ -1,0 +1,3 @@
+title=Communalca
+author=RH
+orientation=portrait
